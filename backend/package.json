@@ -1,15 +1,18 @@
 {
-  "name": "test",
-  "version": "1.0.0",
-  "description": "fullstack app",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Abu Zubair",
-  "license": "MIT",
-  "dependencies": {
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2"
-  }
+    "name": "test",
+    "version": "1.0.0",
+    "description": "fullstack app",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "nodemon app.js",
+        "build": "node app.js"
+
+    },
+    "author": "Abu Zubair",
+    "license": "MIT",
+    "dependencies": {
+        "dotenv": "^16.3.1",
+        "express": "^4.18.2"
+    }
 }
