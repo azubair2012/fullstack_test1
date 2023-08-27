@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 const Datapull = () => {
-  const [response, setResponse] = useState(null);
+  const [response, setResponse] = useState();
+  const [result, setResult] = useState("");
 
   //handle change
   const submitContact = async (event) => {
@@ -19,6 +20,7 @@ const Datapull = () => {
       method: "POST",
     });
     const result = await res.json();
+    setResult(result);
     console.log(result);
   };
   //handle change end
@@ -56,6 +58,7 @@ const Datapull = () => {
       >
         Clear Data
       </button>
+      <div>{result.message}</div>
       {/* form data */}
       <form className="flex flex-col" onSubmit={submitContact}>
         <input

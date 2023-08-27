@@ -21,8 +21,8 @@ app.get("/data", (req, res) => {
 //receiving data
 app.post("/data", (req, res) => {
   let newData = req.body;
-  data["country"] = newData.country;
-  let newJsonString = JSON.stringify(data);
+  data["country"] = newData.country; //data got added here
+  let newJsonString = JSON.stringify(data); // this is just for viewing purpose
   console.log(newJsonString);
   res.json({ message: "Data received and processed successfully" });
 });
