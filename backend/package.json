@@ -7,11 +7,12 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "nodemon app.js",
         "build": "node app.js"
-
     },
     "author": "Abu Zubair",
     "license": "MIT",
     "dependencies": {
+        "body-parser": "^1.20.2",
+        "cors": "^2.8.5",
         "dotenv": "^16.3.1",
         "express": "^4.18.2"
     }
