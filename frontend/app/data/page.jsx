@@ -9,7 +9,7 @@ const Datapull = () => {
   //handle change
   const submitContact = async (event) => {
     event.preventDefault();
-    const country = event.target.name.value;
+    let country = event.target.name.value;
     const res = await fetch("http://localhost:5000/data", {
       body: JSON.stringify({
         country: country,
@@ -22,6 +22,7 @@ const Datapull = () => {
     const result = await res.json();
     setResult(result);
     console.log(result);
+    event.target.name.value = "";
   };
   //handle change end
 
