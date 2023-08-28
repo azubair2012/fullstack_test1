@@ -25,6 +25,7 @@ app.get("/data", async(req, res) => {
     const countryNames = Object.values(jsonData.name).map(
         (country) => country.name
     );
+
     //Send the JSON data as the response
     res.json(countryNames);
 });

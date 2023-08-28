@@ -5,13 +5,12 @@ import Link from "next/link";
 const Datapull = () => {
   const [response, setResponse] = useState();
   const [result, setResult] = useState("");
-  const nameRef = useRef(null);
-  const rankRef = useRef(null);
+  let nameRef = useRef(null);
+  let rankRef = useRef(null);
   //handle change
   const submitContact = async (event) => {
     event.preventDefault();
-    // let country = event.target.name.value;
-    // let rank = event.target.rank.value;
+
     let name = nameRef.current.value;
     let rank = rankRef.current.value;
     const res = await fetch("http://localhost:5000/data", {
@@ -27,7 +26,8 @@ const Datapull = () => {
     const result = await res.json();
     setResult(result);
     console.log(result);
-    event.target.name.value = "";
+    nameRef.current.value = "";
+    rankRef.current.value = "";
   };
   //handle change end
 
