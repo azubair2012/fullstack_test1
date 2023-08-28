@@ -9,10 +9,10 @@ const Datapull = () => {
   //handle change
   const submitContact = async (event) => {
     event.preventDefault();
-    let fruit = event.target.name.value;
+    let country = event.target.name.value;
     const res = await fetch("http://localhost:5000/data", {
       body: JSON.stringify({
-        name: fruit,
+        name: country,
       }),
       headers: {
         "Content-Type": "application/json",
