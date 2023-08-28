@@ -43,6 +43,7 @@ app.post("/data", async(req, res) => {
     const newCountry = {
         id: userIdCounter,
         name: req.body.name,
+        rank: req.body.rank,
     };
 
     parsedData.name.push(newCountry); //data got added here

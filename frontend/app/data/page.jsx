@@ -1,18 +1,23 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Link from "next/link";
 
 const Datapull = () => {
   const [response, setResponse] = useState();
   const [result, setResult] = useState("");
-
+  const nameRef = useRef(null);
+  const rankRef = useRef(null);
   //handle change
   const submitContact = async (event) => {
     event.preventDefault();
-    let country = event.target.name.value;
+    // let country = event.target.name.value;
+    // let rank = event.target.rank.value;
+    let name = nameRef.current.value;
+    let rank = rankRef.current.value;
     const res = await fetch("http://localhost:5000/data", {
       body: JSON.stringify({
-        name: country,
+        name: name,
+        rank: rank,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +83,17 @@ const Datapull = () => {
             id="name"
             name="name"
             type="text"
-            autoComplete="name"
+            placeholder="Name"
+            ref={nameRef}
+            required
+          />
+          <input
+            className="my-6 border-4 rounded-xl border-blue-500 h-10"
+            id="name"
+            name="rank"
+            type="number"
+            placeholder="Rank"
+            ref={rankRef}
             required
           />
           <button
