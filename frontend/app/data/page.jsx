@@ -9,10 +9,10 @@ const Datapull = () => {
   //handle change
   const submitContact = async (event) => {
     event.preventDefault();
-    let country = event.target.name.value;
+    let fruit = event.target.name.value;
     const res = await fetch("http://localhost:5000/data", {
       body: JSON.stringify({
-        country: country,
+        name: fruit,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -41,42 +41,54 @@ const Datapull = () => {
       console.log(error);
     }
   };
+  //Clean up function
+  const clearData = (event) => {
+    setResponse(null);
+    setResult("");
+  };
+
   return (
-    <div className="flex flex-col justify-center items-center">
-      <Link href="/">Back to Home</Link>
-      <button
-        onClick={getData}
-        className="w-32 h-16 rounded-lg bg-slate-500 text-white"
-      >
-        Fetch Data
-      </button>
-      {response && <div>{JSON.stringify(response)}</div>}
-      <button
-        onClick={() => {
-          setResponse(null);
-        }}
-        className="w-32 h-16 rounded-lg bg-slate-500 text-white"
-      >
-        Clear Data
-      </button>
-      <div>{result.message}</div>
-      {/* form data */}
-      <form className="flex flex-col" onSubmit={submitContact}>
-        <input
-          className="mb-4 border-b-2"
-          id="name"
-          name="name"
-          type="text"
-          autoComplete="name"
-          required
-        />
-        <button
-          type="submit"
-          className="px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700"
+    <div className="flex flex-col justify-center items-center h-screen">
+      <div className="flex flex-col justify-center items-center border-black rounded-3xl border-4 p-6">
+        <Link
+          href="/"
+          className="px-4 py-2 font-bold text-white bg-purple-400 rounded-full hover:bg-purple-700"
         >
-          Submit
+          Back to Home
+        </Link>
+        <button
+          onClick={getData}
+          className=" my-4 px-4 py-2 font-bold rounded-full bg-slate-500 text-white"
+        >
+          Fetch Data
         </button>
-      </form>
+        {response && <div>{JSON.stringify(response)}</div>}
+        <button
+          onClick={clearData}
+          className="mb-8 px-4 py-2 font-bold rounded-full bg-slate-500 text-white"
+        >
+          Clear Data
+        </button>
+
+        <div id="message">{result.message}</div>
+        {/* form data */}
+        <form className="flex flex-col" onSubmit={submitContact}>
+          <input
+            className="my-6 border-4 rounded-xl border-blue-500 h-10"
+            id="name"
+            name="name"
+            type="text"
+            autoComplete="name"
+            required
+          />
+          <button
+            type="submit"
+            className="px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

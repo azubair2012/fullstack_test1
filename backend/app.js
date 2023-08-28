@@ -4,8 +4,10 @@ const app = express();
 const port = process.env.PORT;
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const fs = require("fs/promises"); // Import the promises version of the 'fs' module
 
-let data = require("./data/data.js"); //data import
+let data = "./data/data.json"; //data path
+
 app.use(
   bodyParser.urlencoded({
     extended: true,
@@ -15,15 +17,39 @@ app.use(bodyParser.json()); //body parser
 
 app.use(cors());
 //sending data
-app.get("/data", (req, res) => {
-  res.json(data);
+app.get("/data", async (req, res) => {
+  // Read the content of the data.json file
+  const fileContent = await fs.readFile(data, "utf-8");
+  const jsonData = JSON.parse(fileContent);
+  //Extract names from user data
+  const countryNames = Object.values(jsonData.name).map(
+    (country) => country.name
+  );
+  //Send the JSON data as the response
+  res.json(countryNames);
 });
+
+let userIdCounter = 0;
 //receiving data
-app.post("/data", (req, res) => {
+app.post("/data", async (req, res) => {
   let newData = req.body;
-  data["country"] = newData.country; //data got added here
-  let newJsonString = JSON.stringify(data); // this is just for viewing purpose
-  console.log(newJsonString);
+  // Read the existing data from the file
+  const existingData = await fs.readFile(data, "utf-8");
+  const parsedData = JSON.parse(existingData);
+  //read the data
+
+  // Generate a new user ID.
+  userIdCounter++;
+  console.log(userIdCounter);
+  const newCountry = {
+    id: userIdCounter,
+    name: req.body.name,
+  };
+
+  parsedData.name.push(newCountry); //data got added here
+  // Write the updated data back to the file
+  await fs.writeFile(data, JSON.stringify(parsedData, null, 2), "utf-8");
+
   res.json({ message: "Data received and processed successfully" });
 });
 
