@@ -138,15 +138,9 @@ const Datapull = () => {
       <br />
       <div className="flex flex-col justify-center items-center h-full">
         <div className="flex flex-col justify-center items-center border-black rounded-3xl border-4 p-6">
-          <Link
-            href="/"
-            className="px-4 py-2 font-bold text-white bg-purple-400 rounded-full hover:bg-purple-700"
-          >
-            Back to Home
-          </Link>
           <button
             onClick={getData}
-            className=" my-4 px-4 py-2 font-bold rounded-full bg-slate-500 text-white"
+            className=" mb-4 px-4 py-2 font-bold rounded-full bg-slate-500 text-white"
           >
             Fetch Data
           </button>

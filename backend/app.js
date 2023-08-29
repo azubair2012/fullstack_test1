@@ -29,7 +29,6 @@ app.get("/data", async (req, res) => {
 
   //Send the JSON data as the response
   res.json(countryNames);
-  console.log(countryNames);
 });
 
 //receiving data
