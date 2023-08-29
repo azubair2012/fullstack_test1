@@ -6,8 +6,12 @@ const Datapull = () => {
   const [response, setResponse] = useState();
   const [result, setResult] = useState("");
   const [deleted, setDeleted] = useState();
+  const [updateResult, setUpdateResult] = useState("");
+  const [countries, setCountries] = useState([]);
   let nameRef = useRef(null);
   let rankRef = useRef(null);
+  let updateName = useRef(null);
+  let updateRank = useRef(null);
   let deleteRef = useRef(null);
 
   //handle change
@@ -33,7 +37,41 @@ const Datapull = () => {
     rankRef.current.value = "";
   };
   //handle change end
+  //updating data
+  const handleUpdate = async (event) => {
+    event.preventDefault();
+    let name = updateName.current.value;
+    let rank = updateRank.current.value;
+    if (name == "" && rank == "") {
+      alert("Enter a name please.");
+    } else {
+      try {
+        const response = await fetch(`http://localhost:5000/data/${name}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: name,
+            rank: rank,
+          }),
+        });
 
+        if (response.ok) {
+          const result = await response.json();
+          setUpdateResult(result);
+          updateRank.current.value = "";
+          updateName.current.value = "";
+        } else {
+          console.error("Failed to update data");
+        }
+      } catch (error) {
+        console.error("Error updating data:", error);
+      }
+    }
+  };
+
+  //reading data
   const getData = async () => {
     try {
       const response = await fetch("http://localhost:5000/data", {
@@ -43,13 +81,13 @@ const Datapull = () => {
         },
       });
       const result = await response.json();
-
+      console.log();
       setResponse(result);
     } catch (error) {
       console.log(error);
     }
   };
-  const [countries, setCountries] = useState([]);
+
   //deleting data
   const handleDelete = async () => {
     let deletedValue = deleteRef.current.value;
@@ -83,6 +121,7 @@ const Datapull = () => {
     setResponse(null);
     setResult("");
     setDeleted("");
+    setUpdateResult("");
   };
 
   return (
@@ -107,6 +146,9 @@ const Datapull = () => {
         >
           Clear Data
         </button>
+
+        {/* deleting form */}
+
         <div className="flex flex-col border-2 border-gray-700 rounded-md bg-slate-600 justify-center items-center">
           <button
             onClick={handleDelete}
@@ -119,7 +161,7 @@ const Datapull = () => {
             id="deletedName"
             name="name"
             type="text"
-            placeholder="Delete Field"
+            placeholder="Delete Data"
             ref={deleteRef}
           />
           {deleted && (
@@ -127,6 +169,35 @@ const Datapull = () => {
               {JSON.stringify(deleted.message)}
             </div>
           )}
+        </div>
+
+        {/* Updating form */}
+
+        <div className="mt-6 flex flex-col border-2 border-gray-500 rounded-md bg-orange-400 justify-center items-center">
+          <button
+            onClick={handleUpdate}
+            className="mb-2 mt-6 px-4 py-2 font-bold rounded-full bg-red-700 text-white"
+          >
+            Update Data
+          </button>
+          <input
+            className="mb-6 border-4 rounded-xl border-blue-500 h-10"
+            id="cName"
+            name="name"
+            type="text"
+            placeholder="Country"
+            ref={updateName}
+          />
+          <input
+            className="mb-6 border-4 rounded-xl border-blue-500 h-10"
+            id="cRank"
+            name="name"
+            type="number"
+            placeholder="Updated rank"
+            ref={updateRank}
+          />
+
+          <div className="text-white mb-6">{updateResult.message}</div>
         </div>
 
         <div id="message">{result.message}</div>

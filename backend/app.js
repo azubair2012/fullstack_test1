@@ -22,12 +22,14 @@ app.get("/data", async (req, res) => {
   const fileContent = await fs.readFile(data, "utf-8");
   const jsonData = JSON.parse(fileContent);
   //Extract names from user data
-  const countryNames = Object.values(jsonData.name).map(
-    (country) => country.name
-  );
+  const countryNames = Object.values(jsonData.name).map((country) => ({
+    name: country.name,
+    rank: country.rank,
+  }));
 
   //Send the JSON data as the response
   res.json(countryNames);
+  console.log(countryNames);
 });
 
 //receiving data
@@ -52,6 +54,41 @@ app.post("/data", async (req, res) => {
 
   res.status(200).json({ message: "Data received and processed successfully" });
 });
+
+//update data
+app.put("/data/:name", async (req, res) => {
+  const updatedName = req.params.name;
+
+  try {
+    // Read the existing data from the file
+    const existingData = await fs.readFile(data, "utf-8");
+    const parsedData = JSON.parse(existingData);
+
+    // Find the index of the country to update
+    const countryIndex = parsedData.name.findIndex(
+      (country) => country.name === updatedName
+    );
+
+    if (countryIndex === -1) {
+      return res.status(404).json({ message: "Country not found" });
+    }
+
+    // Update the country's information
+
+    parsedData.name[countryIndex].rank = req.body.rank;
+
+    // Write the updated data back to the file
+    await fs.writeFile(data, JSON.stringify(parsedData, null, 2), "utf-8");
+
+    res.status(200).json({ message: "Data updated successfully" });
+  } catch (error) {
+    console.error("Error updating country:", error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while updating the country" });
+  }
+});
+//update data end
 
 //deleting data
 app.delete("/data/:name", async (req, res) => {
