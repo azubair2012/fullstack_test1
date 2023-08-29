@@ -53,24 +53,28 @@ const Datapull = () => {
   //deleting data
   const handleDelete = async () => {
     let deletedValue = deleteRef.current.value;
+    if (deletedValue == "") {
+      alert("Enter a name please.");
+    } else {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/data/${deletedValue}`,
+          {
+            method: "DELETE",
+          }
+        );
 
-    try {
-      const response = await fetch(
-        `http://localhost:5000/data/${deletedValue}`,
-        {
-          method: "DELETE",
+        const deletedResult = await response.json();
+        setDeleted(deletedResult);
+        if (response.ok) {
+          // Data deleted successfully, perform any necessary UI updates
+          deleteRef.current.value = "";
+        } else {
+          console.error("Failed to delete data");
         }
-      );
-      const deletedResult = await response.json();
-      setDeleted(deletedResult);
-      if (response.ok) {
-        // Data deleted successfully, perform any necessary UI updates
-        deleteRef.current.value = "";
-      } else {
-        console.error("Failed to delete data");
+      } catch (error) {
+        console.error("Error deleting data:", error);
       }
-    } catch (error) {
-      console.error("Error deleting data:", error);
     }
   };
 
@@ -112,12 +116,11 @@ const Datapull = () => {
           </button>
           <input
             className="mb-6 border-4 rounded-xl border-blue-500 h-10"
-            id="name"
+            id="deletedName"
             name="name"
             type="text"
-            placeholder="Name"
+            placeholder="Delete Field"
             ref={deleteRef}
-            required
           />
           {deleted && (
             <div className="text-white mb-6">
@@ -140,7 +143,7 @@ const Datapull = () => {
           />
           <input
             className="my-6 border-4 rounded-xl border-blue-500 h-10"
-            id="name"
+            id="rank"
             name="rank"
             type="number"
             placeholder="Rank"

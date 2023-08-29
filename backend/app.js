@@ -56,13 +56,14 @@ app.post("/data", async (req, res) => {
 //deleting data
 app.delete("/data/:name", async (req, res) => {
   const deletedName = req.params.name; // Convert the id to an integer
-  console.log(deletedName);
+
   try {
     // Read the existing data from the file
     const existingData = await fs.readFile(data, "utf-8");
     const parsedData = JSON.parse(existingData);
 
     // Find the index of the country to delete
+
     const countryIndex = parsedData.name.findIndex(
       (country) => country.name === deletedName
     );
@@ -76,7 +77,7 @@ app.delete("/data/:name", async (req, res) => {
     // Write the updated data back to the file
     await fs.writeFile(data, JSON.stringify(parsedData, null, 2), "utf-8");
 
-    res.status(200).json({ message: "Successfully deleted." });
+    res.status(200).json({ message: `Successfully deleted ${deletedName}` });
   } catch (error) {
     console.error("Error deleting country:", error);
     res
