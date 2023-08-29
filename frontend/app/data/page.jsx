@@ -7,6 +7,7 @@ const Datapull = () => {
   const [result, setResult] = useState("");
   let nameRef = useRef(null);
   let rankRef = useRef(null);
+
   //handle change
   const submitContact = async (event) => {
     event.preventDefault();
@@ -40,12 +41,31 @@ const Datapull = () => {
         },
       });
       const result = await response.json();
-      setResponse(result);
       console.log(result);
+      setResponse(result);
     } catch (error) {
       console.log(error);
     }
   };
+  const [countries, setCountries] = useState([]);
+  //deleting data
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch("http://localhost:5000/data/1693287402555", {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        // Data deleted successfully, perform any necessary UI updates
+        setCountries(countries.filter((country) => country.id !== id));
+      } else {
+        console.error("Failed to delete data");
+      }
+    } catch (error) {
+      console.error("Error deleting data:", error);
+    }
+  };
+
   //Clean up function
   const clearData = (event) => {
     setResponse(null);
@@ -73,6 +93,12 @@ const Datapull = () => {
           className="mb-8 px-4 py-2 font-bold rounded-full bg-slate-500 text-white"
         >
           Clear Data
+        </button>
+        <button
+          onClick={handleDelete}
+          className="mb-8 px-4 py-2 font-bold rounded-full bg-red-700 text-white"
+        >
+          Delete Data
         </button>
 
         <div id="message">{result.message}</div>
