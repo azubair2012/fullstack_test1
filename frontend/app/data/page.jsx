@@ -131,10 +131,9 @@ const Datapull = () => {
       <h1 className="text-center font-extrabold text-5xl">CRUD Operations</h1>
       <br />
       <p className="text-center mx-[10vw] lg:mx-[20vw] text-xl">
-        Excuse the UI/UX. This application is a demonstration of CRUD operation
-        using MERN stack. In no way, shape or form it represents the design
-        capability of the programmer. Asthetic aspect has not been the priority
-        in this project.
+        This application is a demonstration of CRUD operation using MERN stack.
+        In no way, shape or form it represents the design capability of the
+        programmer. Asthetic aspect has not been the priority in this project.
       </p>
 
       <br />
@@ -209,7 +208,7 @@ const Datapull = () => {
           </div>
 
           {/* form data */}
-          <div className="mt-6 flex flex-col border-2 border-gray-500 rounded-md bg-slate-950 justify-center items-center">
+          <div className="mt-4 flex flex-col border-2 border-gray-500 rounded-md bg-slate-950 justify-center items-center">
             <form className="flex flex-col" onSubmit={submitData}>
               <input
                 className="text-center mb-2 mt-4 border-4 rounded-xl border-blue-500 h-10"

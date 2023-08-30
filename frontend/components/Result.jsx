@@ -30,7 +30,7 @@ const Result = (props) => {
         </p>
         <p className="mt-4 w-[200px]">
           Press{" "}
-          <span className="px-4 py-2 font-bold rounded-full bg-slate-500 text-white">
+          <span className="px-4 py-2 font-bold rounded-full bg-green-900 text-white">
             Fetch Data
           </span>{" "}
           button for updated result.
