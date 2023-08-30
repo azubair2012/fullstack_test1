@@ -148,10 +148,10 @@ const Datapull = () => {
           />
         </div>
         <div className="flex flex-col justify-center items-center border-black rounded-3xl border-4 p-6">
-          <div className="flex w-[250px] border-2 border-gray-700 rounded-md bg-blue-500 justify-center items-center mb-4">
+          <div className="flex w-[250px] border-2 border-gray-700 rounded-md bg-blue-400 justify-center items-center mb-4">
             <button
               onClick={getData}
-              className="my-4 px-4 py-2 font-bold rounded-full bg-white text-black"
+              className="my-4 px-4 py-2 font-bold rounded-full bg-green-900 text-white"
             >
               Fetch Data
             </button>
@@ -202,7 +202,7 @@ const Datapull = () => {
             />
             <button
               onClick={handleUpdate}
-              className="mb-4 mt-6 px-4 py-2 font-bold rounded-full bg-red-700 text-white"
+              className="mb-4 mt-6 px-4 py-2 font-bold rounded-full bg-black text-white"
             >
               Update Data
             </button>
