@@ -28,7 +28,9 @@ app.get("/data", async (req, res) => {
   }));
 
   //Send the JSON data as the response
+
   res.json(countryNames);
+  // res.json({ message: 'Press "Fetch Data" button again for updated result.' });
 });
 
 //receiving data

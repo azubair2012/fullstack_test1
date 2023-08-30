@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useRef } from "react";
 import Link from "next/link";
+import Result from "./../../components/Result";
+import Animation from "./../../components/Animation";
 
 const Datapull = () => {
   const [response, setResponse] = useState();
@@ -81,7 +83,7 @@ const Datapull = () => {
         },
       });
       const result = await response.json();
-      console.log();
+
       setResponse(result);
     } catch (error) {
       console.log(error);
@@ -128,7 +130,7 @@ const Datapull = () => {
     <div>
       <h1 className="text-center font-extrabold text-5xl">CRUD Operations</h1>
       <br />
-      <p className="text-center mx-[20vw] text-xl">
+      <p className="text-center mx-[10vw] lg:mx-[20vw] text-xl">
         Excuse the UI/UX. This application is a demonstration of CRUD operation
         using MERN stack. In no way, shape or form it represents the design
         capability of the programmer. Asthetic aspect has not been the priority
@@ -136,106 +138,109 @@ const Datapull = () => {
       </p>
 
       <br />
-      <div className="flex flex-col justify-center items-center h-full">
+      <div className="flex justify-center items-center h-full gap-4">
+        <div className=" flex flex-col items-center border-black rounded-3xl border-4 p-6">
+          <Result
+            data={response}
+            delete={deleted}
+            input={result}
+            update={updateResult}
+          />
+        </div>
         <div className="flex flex-col justify-center items-center border-black rounded-3xl border-4 p-6">
-          <button
-            onClick={getData}
-            className=" mb-4 px-4 py-2 font-bold rounded-full bg-slate-500 text-white"
-          >
-            Fetch Data
-          </button>
-          {response && (
-            <div className=" w-[300px]">{JSON.stringify(response)}</div>
-          )}
-          <button
-            onClick={clearData}
-            className="mb-8 px-4 py-2 font-bold rounded-full bg-slate-500 text-white"
-          >
-            Clear Data
-          </button>
+          <div className="flex w-[250px] border-2 border-gray-700 rounded-md bg-blue-500 justify-center items-center mb-4">
+            <button
+              onClick={getData}
+              className="my-4 px-4 py-2 font-bold rounded-full bg-white text-black"
+            >
+              Fetch Data
+            </button>
+          </div>
 
           {/* deleting form */}
 
           <div className="flex flex-col border-2 border-gray-700 rounded-md bg-slate-600 justify-center items-center">
-            <button
-              onClick={handleDelete}
-              className="mb-2 mt-6 px-4 py-2 font-bold rounded-full bg-red-700 text-white"
-            >
-              Delete Data
-            </button>
             <input
-              className="mb-6 border-4 rounded-xl border-blue-500 h-10"
+              className="my-4 border-4 rounded-xl border-blue-500 h-10 text-center"
               id="deletedName"
               name="name"
               type="text"
               placeholder="Delete Data"
               ref={deleteRef}
             />
-            {deleted && (
-              <div className="text-white mb-6">
-                {JSON.stringify(deleted.message)}
-              </div>
-            )}
+            <button
+              onClick={handleDelete}
+              className="mb-4  px-4 py-2 font-bold rounded-full bg-red-700 text-white"
+            >
+              Delete Data
+            </button>
           </div>
-
+          <button
+            onClick={clearData}
+            className="mt-6 px-4 py-2 font-bold rounded-full bg-slate-500 text-white"
+          >
+            Clear Data
+          </button>
           {/* Updating form */}
 
           <div className="mt-6 flex flex-col border-2 border-gray-500 rounded-md bg-orange-400 justify-center items-center">
-            <button
-              onClick={handleUpdate}
-              className="mb-2 mt-6 px-4 py-2 font-bold rounded-full bg-red-700 text-white"
-            >
-              Update Data
-            </button>
             <input
-              className="mb-6 border-4 rounded-xl border-blue-500 h-10"
+              className="text-center my-4 border-4 rounded-xl border-blue-500 h-10"
               id="cName"
               name="name"
               type="text"
               placeholder="Country"
               ref={updateName}
-            />
+            />{" "}
             <input
-              className="mb-6 border-4 rounded-xl border-blue-500 h-10"
+              className="text-center border-4 rounded-xl border-blue-500 h-10"
               id="cRank"
               name="name"
               type="number"
               placeholder="Updated rank"
               ref={updateRank}
             />
-
-            <div className="text-white mb-6">{updateResult.message}</div>
+            <button
+              onClick={handleUpdate}
+              className="mb-4 mt-6 px-4 py-2 font-bold rounded-full bg-red-700 text-white"
+            >
+              Update Data
+            </button>
           </div>
 
-          <div id="message">{result.message}</div>
           {/* form data */}
-          <form className="flex flex-col" onSubmit={submitData}>
-            <input
-              className="my-6 border-4 rounded-xl border-blue-500 h-10"
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Name"
-              ref={nameRef}
-              required
-            />
-            <input
-              className="my-6 border-4 rounded-xl border-blue-500 h-10"
-              id="rank"
-              name="rank"
-              type="number"
-              placeholder="Rank"
-              ref={rankRef}
-              required
-            />
-            <button
-              type="submit"
-              className="px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700"
-            >
-              Submit
-            </button>
-          </form>
+          <div className="mt-6 flex flex-col border-2 border-gray-500 rounded-md bg-slate-950 justify-center items-center">
+            <form className="flex flex-col" onSubmit={submitData}>
+              <input
+                className="text-center mb-2 mt-4 border-4 rounded-xl border-blue-500 h-10"
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Name"
+                ref={nameRef}
+                required
+              />
+              <input
+                className="text-center my-2 border-4 rounded-xl border-blue-500 h-10"
+                id="rank"
+                name="rank"
+                type="number"
+                placeholder="Rank"
+                ref={rankRef}
+                required
+              />
+              <button
+                type="submit"
+                className="mb-4 mt-4 px-4 py-2 font-bold rounded-full bg-blue-500 text-white hover:bg-blue-700"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
+        {/* <div className="w-[250px] h-[500px] flex flex-col items-center border-black rounded-3xl border-4 p-6">
+          <Animation />
+        </div> */}
       </div>
     </div>
   );
