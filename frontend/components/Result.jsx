@@ -36,6 +36,15 @@ const Result = (props) => {
           button for updated result.
         </p>
       </div>
+      {/* clear button */}
+      <div className="border-t-4 mt-4">
+        <button
+          onClick={props.onClick}
+          className="shadow-xl mt-2 px-4 py-2 font-bold rounded-full bg-red-700 text-white"
+        >
+          Clear Data
+        </button>
+      </div>
     </>
   );
 };
