@@ -5,6 +5,7 @@ const Result = (props) => {
   let deleted = props.delete;
   let input = props.input;
   let update = props.update;
+  let clearData = props.onClick;
   return (
     <>
       <div className="flex gap-4 text-lg font-bold border-b-4 mb-2">
@@ -39,7 +40,7 @@ const Result = (props) => {
       {/* clear button */}
       <div className="border-t-4 mt-4">
         <button
-          onClick={props.onClick}
+          onClick={clearData}
           className="shadow-xl mt-2 px-4 py-2 font-bold rounded-full bg-red-700 text-white"
         >
           Clear Data
