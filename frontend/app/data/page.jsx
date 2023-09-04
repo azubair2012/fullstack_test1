@@ -148,7 +148,7 @@ const Datapull = () => {
           />
         </div>
         <div className="flex flex-col justify-center items-center border-black rounded-3xl border-4 p-6">
-          <div className="flex w-[250px] border-2 border-gray-700 rounded-md bg-blue-400 justify-center items-center mb-4">
+          <div className="flex w-[240px] border-2 border-gray-700 rounded-md justify-center items-center mb-4">
             <button
               onClick={getData}
               className="shadow-xl my-4 px-4 py-2 font-bold rounded-full bg-green-900 text-white"
