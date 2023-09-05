@@ -27,8 +27,19 @@ const Result = (props) => {
       <div className="text-center">
         <h1 className="font-bold text-xl border-b-4 mt-6">Message</h1>
         <p className="mt-2 text-red-700 font-semibold w-[200px]">
-          {deleted?.message || input.message || update.message}
+          {deleted?.message || update.message}
         </p>
+        <div>
+          {input ? (
+            <p>
+              {" "}
+              <span className="text-red-700 font-bold">{input.name}</span> has
+              been added.
+            </p>
+          ) : (
+            ""
+          )}
+        </div>
         <p className="mt-4 w-[200px] text-purple-500">
           Press <span className="text-green-700 font-bold">Fetch Data </span>
           button for updated result.
