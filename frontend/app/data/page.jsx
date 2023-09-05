@@ -2,7 +2,6 @@
 import React, { useState, useRef } from "react";
 import Link from "next/link";
 import Result from "./../../components/Result";
-import Animation from "./../../components/Animation";
 
 const Datapull = () => {
   const [response, setResponse] = useState();
@@ -128,7 +127,9 @@ const Datapull = () => {
 
   return (
     <div>
-      <h1 className="text-center font-extrabold text-5xl">CRUD Operations</h1>
+      <h1 className="text-center font-extrabold text-5xl mt-2">
+        CRUD Operations
+      </h1>
       <br />
       <p className="text-center mx-[10vw] lg:mx-[20vw] text-xl">
         This application is a demonstration of CRUD operation using MERN stack.
@@ -233,9 +234,6 @@ const Datapull = () => {
             </form>
           </div>
         </div>
-        {/* <div className="w-[250px] h-[500px] flex flex-col items-center border-black rounded-3xl border-4 p-6">
-          <Animation />
-        </div> */}
       </div>
     </div>
   );

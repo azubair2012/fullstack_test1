@@ -5,8 +5,12 @@ const port = process.env.PORT;
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const fs = require("fs/promises"); // Import the promises version of the 'fs' module
-
+const connectDb = require("./config/dbConnection");
+// const Country = require("./models/country");
+let postRoute = "./routers/postRoute";
 let data = "./data/data.json"; //data path
+
+connectDb();
 
 app.use(
   bodyParser.urlencoded({
@@ -34,6 +38,7 @@ app.get("/data", async (req, res) => {
 });
 
 //receiving data
+// app.use("/", postRoute);
 app.post("/data", async (req, res) => {
   let newData = req.body;
   // Read the existing data from the file

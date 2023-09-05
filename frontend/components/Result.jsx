@@ -30,10 +30,7 @@ const Result = (props) => {
           {deleted?.message || input.message || update.message}
         </p>
         <p className="mt-4 w-[200px] text-purple-500">
-          Press{" "}
-          <span className="px-4 py-2 font-bold rounded-full bg-green-900 text-white">
-            Fetch Data
-          </span>{" "}
+          Press <span className="text-green-700 font-bold">Fetch Data </span>
           button for updated result.
         </p>
       </div>
