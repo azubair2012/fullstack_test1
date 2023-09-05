@@ -29,7 +29,7 @@ const Result = (props) => {
         <p className="mt-2 text-red-700 font-semibold w-[200px]">
           {deleted?.message || input.message || update.message}
         </p>
-        <p className="mt-4 w-[200px]">
+        <p className="mt-4 w-[200px] text-purple-500">
           Press{" "}
           <span className="px-4 py-2 font-bold rounded-full bg-green-900 text-white">
             Fetch Data
