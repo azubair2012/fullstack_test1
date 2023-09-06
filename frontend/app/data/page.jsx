@@ -15,7 +15,7 @@ const Datapull = () => {
   let updateRank = useRef(null);
   let deleteRef = useRef(null);
 
-  //handle change
+  //postiing names
   const submitData = async (event) => {
     event.preventDefault();
     let name = nameRef.current.value;
@@ -37,7 +37,7 @@ const Datapull = () => {
     nameRef.current.value = "";
     rankRef.current.value = "";
   };
-  //handle change end
+
   //updating data
   const handleUpdate = async (event) => {
     event.preventDefault();

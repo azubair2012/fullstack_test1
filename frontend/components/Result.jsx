@@ -16,7 +16,7 @@ const Result = (props) => {
         {data?.map((country) => {
           return (
             <div className="flex  items-center border-b-2 relative">
-              <p className="pr-12" key={country}>
+              <p className="pr-12" key={country.id}>
                 {country.name}
               </p>
               <p className=" -right-4 absolute ">{country.rank}</p>
