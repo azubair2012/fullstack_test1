@@ -29,6 +29,7 @@ app.use("/data", getroute);
 app.use("/", postroute);
 app.use("/", putroute);
 app.use("/", deleteroute);
+
 //sending data
 
 // app.get("/data", async (req, res) => {
