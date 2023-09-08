@@ -79,7 +79,7 @@ const Datapull = () => {
   const getData = async () => {
     try {
       const response = await fetch(
-        "https://rich-plum-wildebeest-coat.cyclic.cloud",
+        "https://rich-plum-wildebeest-coat.cyclic.cloud/data",
         {
           method: "GET",
           headers: {
