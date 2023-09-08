@@ -21,16 +21,19 @@ const Datapull = () => {
     let name = nameRef.current.value;
     let rank = rankRef.current.value;
 
-    const res = await fetch("https://rich-plum-wildebeest-coat.cyclic.cloud", {
-      body: JSON.stringify({
-        name: name,
-        rank: rank,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-    });
+    const res = await fetch(
+      "https://rich-plum-wildebeest-coat.cyclic.cloud/data",
+      {
+        body: JSON.stringify({
+          name: name,
+          rank: rank,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      }
+    );
     const result = await res.json();
     setResult(result);
     console.log(result);
@@ -48,7 +51,7 @@ const Datapull = () => {
     } else {
       try {
         const response = await fetch(
-          `https://rich-plum-wildebeest-coat.cyclic.cloud/${name}`,
+          `https://rich-plum-wildebeest-coat.cyclic.cloud/data/${name}`,
           {
             method: "PUT",
             headers: {
@@ -103,7 +106,7 @@ const Datapull = () => {
     } else {
       try {
         const response = await fetch(
-          `https://rich-plum-wildebeest-coat.cyclic.cloud/${deletedValue}`,
+          `https://rich-plum-wildebeest-coat.cyclic.cloud/data/${deletedValue}`,
           {
             method: "DELETE",
           }
