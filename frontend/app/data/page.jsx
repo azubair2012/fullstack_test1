@@ -21,7 +21,7 @@ const Datapull = () => {
     let name = nameRef.current.value;
     let rank = rankRef.current.value;
 
-    const res = await fetch("http://localhost:5000/data", {
+    const res = await fetch("https://rich-plum-wildebeest-coat.cyclic.cloud", {
       body: JSON.stringify({
         name: name,
         rank: rank,
@@ -47,16 +47,19 @@ const Datapull = () => {
       alert("Enter a name please.");
     } else {
       try {
-        const response = await fetch(`http://localhost:5000/data/${name}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: name,
-            rank: rank,
-          }),
-        });
+        const response = await fetch(
+          `https://rich-plum-wildebeest-coat.cyclic.cloud/${name}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: name,
+              rank: rank,
+            }),
+          }
+        );
 
         if (response.ok) {
           const result = await response.json();
@@ -75,12 +78,15 @@ const Datapull = () => {
   //reading data
   const getData = async () => {
     try {
-      const response = await fetch("http://localhost:5000/data", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://rich-plum-wildebeest-coat.cyclic.cloud",
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      );
       const result = await response.json();
 
       setResponse(result);
@@ -97,7 +103,7 @@ const Datapull = () => {
     } else {
       try {
         const response = await fetch(
-          `http://localhost:5000/data/${deletedValue}`,
+          `https://rich-plum-wildebeest-coat.cyclic.cloud/${deletedValue}`,
           {
             method: "DELETE",
           }
